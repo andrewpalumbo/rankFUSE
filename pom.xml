@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>edu.fordham.rankFUSE</groupId>
+    <artifactId>rankFUSE</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+    <skipTests>false</skipTests>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.clover.multiproject>true</maven.clover.multiproject>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <msurefire.version>2.18.1</msurefire.version>
+    <mpmd.version>3.4</mpmd.version>
+    <mcheckstyle.version>2.15</mcheckstyle.version>
+    <mfindbugs.version>3.0.1</mfindbugs.version>
+    <mjavadoc.version>2.10.3</mjavadoc.version>
+    <mscala.version>3.2.0</mscala.version>
+    <slf4j.version>1.7.19</slf4j.version>
+    <scala.compat.version>2.10</scala.compat.version>
+    <scala.version>2.10.8</scala.version>
+
+    </properties>
+
+    <packaging>jar</packaging>
+
+    <build>
+    <plugins>
+
+    <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+    </plugin>
+
+    <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+    </plugin>
+
+    <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <executions>
+            <execution>
+                <id>add-scala-sources</id>
+                <phase>initialize</phase>
+                <goals>
+                    <goal>add-source</goal>
+                </goals>
+            </execution>
+            <execution>
+                <id>scala-compile</id>
+                <phase>process-resources</phase>
+                <goals>
+                    <goal>compile</goal>
+                </goals>
+            </execution>
+            <execution>
+                <id>scala-test-compile</id>
+                <phase>process-test-resources</phase>
+                <goals>
+                    <goal>testCompile</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin>
+
+    <!--this is what scalatest recommends to do to enable scala tests -->
+
+    <!-- disable surefire -->
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+            <skipTests>true</skipTests>
+        </configuration>
+    </plugin>
+    <!-- enable scalatest -->
+    <plugin>
+        <groupId>org.scalatest</groupId>
+        <artifactId>scalatest-maven-plugin</artifactId>
+        <executions>
+            <execution>
+                <id>test</id>
+                <goals>
+                    <goal>test</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>test-jar</goal>
+                    </goals>
+                    <phase>package</phase>
+                </execution>
+            </executions>
+        </plugin>
+
+    </plugins>
+    </build>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-compiler</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-reflect</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-actors</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scalap</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_${scala.compat.version}</artifactId>
+        </dependency>
+
+    </dependencies>
+
+
+</project>
